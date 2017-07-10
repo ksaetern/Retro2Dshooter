@@ -237,6 +237,10 @@ bool	GameEntity::collision()
 		{
 			enemy_bullets[i].Die();
 			spaceX->setLife();
+			system("afplay -t 20 ./mp3/explode.mp3 &");
+			wattron(_curwin, COLOR_PAIR(4));
+			mvwprintw(_curwin, enemyObj[i].getY(), enemyObj[i].getX(), "*");
+			wattron(_curwin, COLOR_PAIR(4));
 		}
 		if (!spaceX->isAlive())
 			return 1;
