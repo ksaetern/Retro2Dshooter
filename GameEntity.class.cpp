@@ -230,7 +230,7 @@ bool	GameEntity::collision()
 			spaceX->setLife();
 			system("afplay -t 20 ./mp3/explode.mp3 &");
 			wattron(_curwin, COLOR_PAIR(4));
-			mvwprintw(_curwin, enemyObj[i].getY(), enemyObj[i].getX(), "*");
+			mvwprintw(_curwin, spaceX->getY(), spaceX->getX(), "*");
 			wattron(_curwin, COLOR_PAIR(4));
 		}
 		if (enemy_bullets[i].isAlive() && (enemy_bullets[i].colision(spaceX->getX(), spaceX->getY())))
@@ -239,7 +239,7 @@ bool	GameEntity::collision()
 			spaceX->setLife();
 			system("afplay -t 20 ./mp3/explode.mp3 &");
 			wattron(_curwin, COLOR_PAIR(4));
-			mvwprintw(_curwin, enemyObj[i].getY(), enemyObj[i].getX(), "*");
+			mvwprintw(_curwin, spaceX->getY(), spaceX->getX(), "*");
 			wattron(_curwin, COLOR_PAIR(4));
 		}
 		if (!spaceX->isAlive())
