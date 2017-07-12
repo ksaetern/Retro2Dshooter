@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iiliuk <iiliuk@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ksaetern <ksaetern@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/08 13:04:28 by iiliuk            #+#    #+#             */
-/*   Updated: 2017/07/09 22:38:34 by iiliuk           ###   ########.fr       */
+/*   Updated: 2017/07/11 17:01:43 by ksaetern         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ int main()
 	if (choices[highlight].compare("FALCON MUSIC") == 0)
 	{
 		system("afplay -t 20 ./mp3/falcon.mp3 &");
-		system("say 'You are awesome but also i want cookies'");
+		system("say 'Hey. You are Awesome.'");
 		Game play = Game();
 	}
 	endwin();

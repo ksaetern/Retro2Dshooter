@@ -18,9 +18,17 @@ Game::Game(Game const &src) { *this = src; }
 
 Game::~Game()
 {
-	endwin();
-	std::cout << "GAME OVER" << std::endl;
+	int yMax, xMax, i;
+	i = 1;
+	getmaxyx(stdscr, yMax, xMax);
+	WINDOW 		*playwin = newwin(yMax - 8, xMax - 3, 5, 1);
+	std::cout << "GAME OVER" << std::endl;	
+	while (i != 0)
+	{
+		i = end(playwin, yMax, xMax);
+	}
 	system("afplay -t 20 ./mp3/gameover.mp3 &");
+	return ;
 }
 
 Game const &	Game::operator=(Game const & rhs)
@@ -69,6 +77,38 @@ int		Game::scoreBoard(WINDOW *score, int scorestart, GameEntity game)
 	return (0);
 }
 
+int	Game::end(WINDOW *playwin, int yMax, int xMax)
+{
+	int 		choice = 0;
+	wclear(playwin);
+
+	wattron(playwin, COLOR_PAIR(3));
+	mvwprintw(playwin, yMax/2, xMax/2 - 25, "[GAME OVER] : [X] quit. [ENTER] retry.");
+	wattroff(playwin, COLOR_PAIR(3));
+	refresh();
+	wrefresh(playwin);
+
+	while (1)
+	{
+		choice = wgetch(playwin);
+		if (choice == 'x')
+		{
+			system("afplay -t 20 ./mp3/gameover.mp3 &");
+			endwin();
+			return 0;
+		}
+		else if (choice == 10)
+		{
+			system("afplay -t 20 ./mp3/falcon.mp3 &");
+			system("say '. ALL your bases belong to us.'");
+			start();
+			return 1;
+		}
+	}
+
+	
+}
+
 void	Game::start()
 {
 	int yMax, xMax;
@@ -102,7 +142,6 @@ void	Game::start()
 	int scorestart = 0;
 	if (cur_time->tm_hour != 0 || cur_time->tm_min != 0 || cur_time->tm_sec != 0)
 		scorestart = cur_time->tm_hour * 1000 + cur_time->tm_min * 100 + cur_time->tm_sec;
-
 	GameEntity game(playwin);
 
 	int i = 0;
@@ -122,7 +161,6 @@ void	Game::start()
 		wrefresh(playwin);
 		usleep(30000);
 	}
-	endwin();
 }
 
 int		Game::getmv(GameEntity game)

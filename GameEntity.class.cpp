@@ -21,10 +21,10 @@ GameEntity::GameEntity(WINDOW *win)
 	_curwin = win;
 	getmaxyx(_curwin, _yMax, _xMax);
 	srand(time(NULL));
-	enemyObj = new Enemy[500];
+	enemyObj = new Enemy[300];
 	spaceX = new Player();
-	bullets = new Bullet[500];
-	enemy_bullets = new EnemyBullet[500];
+	bullets = new Bullet[300];
+	enemy_bullets = new EnemyBullet[300];
 }
 
 int GameEntity::getmv() { return (wgetch(_curwin)); }
@@ -35,7 +35,7 @@ int GameEntity::getMaxY() { return _yMax; }
 
 void GameEntity::addWave(int waveSize)
 {
-	for (int i = 0; i < 500; i++)
+	for (int i = 0; i < 300; i++)
 	{
 		if (!enemyObj[i].isAlive())
 		{
@@ -61,7 +61,7 @@ void GameEntity::addWave(int waveSize)
 
 void GameEntity::shootBullets(int waveSize)
 {
-	for (int i = 0; i < 500; i++)
+	for (int i = 0; i < 300; i++)
 	{
 		if (!bullets[i].isAlive())
 		{
@@ -77,13 +77,13 @@ void GameEntity::shootBullets(int waveSize)
 
 void GameEntity::shootEnemyBullets(int shootSize)
 {
-	for (int i = 0; i < 500; i++)
+	for (int i = 0; i < 300; i++)
 	{
 		if (enemyObj[i].isAlive())
 		{
 
 			int canShoot = 1;
-			for(int j = 0; j < 500; j++)
+			for(int j = 0; j < 300; j++)
 			{
 				if((enemyObj[j].isAlive() 
 					&& enemyObj[j].getX() - 20 > spaceX->getX() 
@@ -98,7 +98,7 @@ void GameEntity::shootEnemyBullets(int shootSize)
 			}
 			if(canShoot)
 			{
-				for (int j = 0; j < 500; j++)
+				for (int j = 0; j < 300; j++)
 				{
 					if (!enemy_bullets[j].isAlive())
 					{
@@ -123,7 +123,7 @@ Player *GameEntity::getPlayer()
 
 int GameEntity::isSpaceAvailable(int x, int y)
 {
-	for (int i = 0; i < 500; i++)
+	for (int i = 0; i < 300; i++)
 	{
 		if (enemyObj[i].getX() == x && enemyObj[i].getY() == y)
 			return 0;
@@ -134,7 +134,7 @@ int GameEntity::isSpaceAvailable(int x, int y)
 void	GameEntity::display()
 {
 	int i = 0;
-	while (i < 500)
+	while (i < 300)
 	{
 		if (enemyObj[i].isAlive() || enemyObj[i].hasJustDied())
 		{
@@ -158,9 +158,9 @@ void	GameEntity::display()
 					}
 					if (enemyObj[i].getChar() == '&')
 					{
-						wattron(_curwin, COLOR_PAIR(13));
+						wattron(_curwin, COLOR_PAIR(11));
 						mvwaddch(_curwin, enemyObj[i].getY(), enemyObj[i].getX(), enemyObj[i].getChar());
-						wattroff(_curwin, COLOR_PAIR(13));
+						wattroff(_curwin, COLOR_PAIR(11));
 					}
 				}
 			}
@@ -213,10 +213,10 @@ void	GameEntity::display()
 
 bool	GameEntity::collision()
 {
-	for (int i = 0; i < 500; i++)
+	for (int i = 0; i < 300; i++)
 	{
 		if (enemyObj[i].isAlive())
-			for(int j = 0; j < 500; j++)
+			for(int j = 0; j < 300; j++)
 			{
 				if (bullets[j].isAlive() && (enemyObj[i].colision(bullets[j].getX(), bullets[j].getY())))
 				{
@@ -245,9 +245,9 @@ bool	GameEntity::collision()
 		if (!spaceX->isAlive())
 			return 1;
 	}
-	for (int j = 0; j < 500; ++j)
+	for (int j = 0; j < 300; ++j)
 	{
-		for (int k = 0; (k < 500 && bullets[j].isAlive()); ++k)
+		for (int k = 0; (k < 300 && bullets[j].isAlive()); ++k)
 		{
 			if (enemyObj[k].isAlive() && bullets[j].colision(enemyObj[k].getX(), enemyObj[k].getY()))
 			{

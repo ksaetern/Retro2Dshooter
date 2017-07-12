@@ -14,7 +14,7 @@
 
 EnemyBullet::EnemyBullet() : GameObject()
 {
-	this->_character = '*';
+	this->_character = '~';
 }
 
 EnemyBullet::EnemyBullet(int x, int y) : GameObject('*', x, y, 1) {}

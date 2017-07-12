@@ -36,6 +36,7 @@ public:
 	void 	start();
 	int		getmv(GameEntity game);
 	int 	scoreBoard(WINDOW *score, int scorestart, GameEntity game);
+	int		end(WINDOW *playwin, int yMax, int xMax);
 
 };
 
